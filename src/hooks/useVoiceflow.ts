@@ -16,13 +16,15 @@ export const useVoiceflow = (onConfigError: () => void) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Load Voiceflow script
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs';
     
     script.onload = () => {
+      // Initialize Voiceflow with your agent configuration
       window.voiceflow.chat.load({
-        verify: { projectID: '6685959199292a00072b2d69' },
+        verify: { projectID: '68bd062130b7a96c20248343' },
         url: 'https://general-runtime.voiceflow.com',
         versionID: 'production',
         voice: {
@@ -45,6 +47,7 @@ export const useVoiceflow = (onConfigError: () => void) => {
     document.head.appendChild(script);
 
     return () => {
+      // Cleanup script on unmount
       if (document.head.contains(script)) {
         document.head.removeChild(script);
       }
@@ -52,6 +55,8 @@ export const useVoiceflow = (onConfigError: () => void) => {
   }, [onConfigError]);
 
   const launchUzumAgent = useCallback(() => {
+    console.log('Button clicked, isLoaded:', isLoaded);
+    
     if (!isLoaded) {
       console.error("Voiceflow agent is not loaded yet");
       onConfigError();
@@ -65,6 +70,7 @@ export const useVoiceflow = (onConfigError: () => void) => {
     }
 
     try {
+      console.log('Opening Voiceflow chat...');
       window.voiceflow.chat.open();
     } catch (error) {
       console.error("Error opening Voiceflow chat:", error);
