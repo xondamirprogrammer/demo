@@ -22,7 +22,7 @@ export const useVoiceflow = (onConfigError: () => void) => {
     
     script.onload = () => {
       window.voiceflow.chat.load({
-        verify: { projectID: '6685959199292a00072b2d69' },
+        verify: { projectID: '68bd062130b7a96c20248343' },
         url: 'https://general-runtime.voiceflow.com',
         versionID: 'production',
       }).then(() => {
