@@ -55,25 +55,27 @@ export const useVoiceflow = (onConfigError: () => void) => {
   }, [onConfigError]);
 
   const launchUzumAgent = useCallback(() => {
+    console.log('Uzum Market button clicked, isLoaded:', isLoaded);
+    
     console.log('Button clicked, isLoaded:', isLoaded);
     
     if (!isLoaded) {
-      console.error("Voiceflow agent is not loaded yet");
+      console.error("Voiceflow agent is not loaded yet, showing config error");
       onConfigError();
       return;
     }
 
     if (!window.voiceflow || !window.voiceflow.chat) {
-      console.error("Voiceflow chat widget is not available");
+      console.error("Voiceflow chat widget is not available, showing config error");
       onConfigError();
       return;
     }
 
     try {
-      console.log('Opening Voiceflow chat...');
+      console.log('Opening Voiceflow chat widget...');
       window.voiceflow.chat.open();
     } catch (error) {
-      console.error("Error opening Voiceflow chat:", error);
+      console.error("Error opening Voiceflow chat widget:", error);
       onConfigError();
     }
   }, [isLoaded, onConfigError]);
