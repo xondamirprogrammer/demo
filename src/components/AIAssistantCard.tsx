@@ -28,8 +28,11 @@ export const AIAssistantCard: React.FC<AIAssistantCardProps> = ({
   onTest
 }) => {
   const handleButtonClick = () => {
-    // Only trigger Voiceflow for Uzum Market Assistant
-    if (title === "Uzum Market Assistant") {
+    if (title === "my.gov.uz Guide") {
+      // Redirect to the my.gov.uz integration URL
+      window.open("https://integrate-my-gov-uz-urfr.bolt.host", "_blank");
+    } else if (title === "Uzum Market Assistant") {
+      // Only trigger Voiceflow for Uzum Market Assistant
       // Load Voiceflow script if not already loaded
       if (!window.voiceflow) {
         const script = document.createElement('script');
